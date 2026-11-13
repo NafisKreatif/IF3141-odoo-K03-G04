@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Portal status demonstrasi dan tagihan QRIS demonstrasi. -->
+    <template id="portal_status_demo_page" name="Portal Status Pesanan (Demonstrasi)">
+        <t t-call="website.layout">
+            <div id="wrap" class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4">
+                                <span class="text-muted">PORTAL STATUS PESANAN · DEMO</span>
+                                <h1 class="h3 mt-2">CL-DEMO-0001</h1>
+                                <p class="text-muted">Contoh halaman status publik tanpa identitas pelanggan.</p>
+                                <div class="alert alert-info">
+                                    Tahap terbaru: <strong>Dicuci</strong><br/>
+                                    Perkiraan selesai: <strong>15 November 2026</strong>
+                                </div>
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Diterima</li>
+                                    <li class="list-group-item active">Dicuci · tahap saat ini</li>
+                                    <li class="list-group-item">Dikeringkan</li>
+                                    <li class="list-group-item">Disetrika</li>
+                                    <li class="list-group-item">Dikemas</li>
+                                    <li class="list-group-item">Siap Antar</li>
+                                    <li class="list-group-item">Selesai</li>
+                                </ol>
+                                <small class="text-muted d-block mt-3">
+                                    Halaman demonstrasi. Tidak memuat data pesanan nyata.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="page_cloudlaundry_portal_demo" model="website.page">
+        <field name="name">Portal Status Pesanan (Demo)</field>
+        <field name="url">/cloudlaundry/status-demo</field>
+        <field name="view_id" ref="portal_status_demo_page"/>
+        <field name="is_published" eval="True"/>
+    </record>
+
+    <record id="view_cloudlaundry_payment_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.payment.tree</field>
+        <field name="model">cloudlaundry.pembayaran</field>
+        <field name="arch" type="xml">
+            <tree string="Tagihan QRIS (Demonstrasi)">
+                <field name="x_id_pesanan"/>
+                <field name="x_metode"/>
+                <field name="x_nominal" sum="Total"/>
+                <field name="x_ref_gateway"/>
+                <field name="x_status" widget="badge"/>
+                <field name="x_waktu"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_payment_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.payment.form</field>
+        <field name="model">cloudlaundry.pembayaran</field>
+        <field name="arch" type="xml">
+            <form string="Tagihan QRIS (Demonstrasi)">
+                <sheet>
+                    <div class="alert alert-warning" role="alert">
+                        Demonstrasi saja. QRIS tidak terhubung ke payment gateway
+                        dan tidak dapat digunakan untuk membayar.
+                    </div>
+                    <group>
+                        <group>
+                            <field name="x_id_pesanan"/>
+                            <field name="x_metode"/>
+                            <field name="x_nominal"/>
+                            <field name="x_mata_uang_id"/>
+                        </group>
+                        <group>
+                            <field name="x_ref_gateway"/>
+                            <field name="x_status"/>
+                            <field name="x_waktu"/>
+                        </group>
+                    </group>
+                    <div class="text-center p-4">
+                        <div class="alert alert-secondary d-inline-block">
+                            KODE QR DEMONSTRASI · BUKAN QRIS AKTIF
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_payments" model="ir.actions.act_window">
+        <field name="name">Tagihan QRIS (Demonstrasi)</field>
+        <field name="res_model">cloudlaundry.pembayaran</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_payment_tree"/>
+    </record>
+
+    <record id="action_cloudlaundry_portal_demo" model="ir.actions.act_url">
+        <field name="name">Portal Status Pesanan (Demo)</field>
+        <field name="url">/cloudlaundry/status-demo</field>
+        <field name="target">self</field>
+    </record>
+</odoo>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pengantaran, penugasan harian, dan komplain. -->
+    <record id="view_cloudlaundry_delivery_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.delivery.tree</field>
+        <field name="model">cloudlaundry.pengantaran</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Jemput dan Antar" default_order="x_jadwal">
+                <field name="x_jadwal"/>
+                <field name="x_jenis"/>
+                <field name="x_id_pesanan"/>
+                <field name="x_alamat"/>
+                <field name="x_id_kurir"/>
+                <field name="x_status" widget="badge"/>
+                <field name="x_waktu_update"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_delivery_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.delivery.form</field>
+        <field name="model">cloudlaundry.pengantaran</field>
+        <field name="arch" type="xml">
+            <form string="Jemput dan Antar">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="x_id_pesanan"/>
+                            <field name="x_jenis"/>
+                            <field name="x_alamat"/>
+                            <field name="x_jadwal"/>
+                        </group>
+                        <group>
+                            <field name="x_id_kurir"/>
+                            <field name="x_status"/>
+                            <field name="x_waktu_update"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_deliveries" model="ir.actions.act_window">
+        <field name="name">Daftar Jemput dan Antar</field>
+        <field name="res_model">cloudlaundry.pengantaran</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_delivery_tree"/>
+    </record>
+
+    <record id="view_cloudlaundry_task_kanban" model="ir.ui.view">
+        <field name="name">cloudlaundry.task.kanban</field>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <kanban string="Papan Penugasan Harian" default_group_by="x_tahap">
+                <field name="name"/>
+                <field name="x_jenis_cloudlaundry"/>
+                <field name="x_id_cabang"/>
+                <field name="x_id_pic"/>
+                <field name="x_id_pesanan"/>
+                <field name="x_tahap"/>
+                <field name="x_jadwal_mulai"/>
+                <field name="x_jadwal_selesai"/>
+                <field name="x_status"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex flex-column gap-1">
+                            <strong><field name="name"/></strong>
+                            <div><field name="x_id_pesanan"/></div>
+                            <div class="text-muted"><field name="x_id_cabang"/> · <field name="x_id_pic"/></div>
+                            <div><field name="x_status" widget="badge"/></div>
+                            <div class="text-muted"><field name="x_jadwal_mulai"/> – <field name="x_jadwal_selesai"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_task_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.task.tree</field>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <tree string="Penugasan Harian">
+                <field name="name"/>
+                <field name="x_jenis_cloudlaundry"/>
+                <field name="x_tanggal"/>
+                <field name="x_id_cabang"/>
+                <field name="x_id_pesanan"/>
+                <field name="x_tahap"/>
+                <field name="x_id_pic"/>
+                <field name="x_jadwal_mulai"/>
+                <field name="x_jadwal_selesai"/>
+                <field name="x_status" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_tasks" model="ir.actions.act_window">
+        <field name="name">Papan Penugasan Harian</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_task_kanban"/>
+        <field name="domain">[('x_jenis_cloudlaundry', '=', 'operasional'), ('x_id_pesanan', '!=', False)]</field>
+        <field name="context">{'group_by': 'x_tahap', 'default_x_jenis_cloudlaundry': 'operasional'}</field>
+    </record>
+
+    <record id="view_cloudlaundry_complaint_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.complaint.tree</field>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <tree string="Kasus Komplain">
+                <field name="name" string="Nomor Kasus"/>
+                <field name="x_id_pesanan"/>
+                <field name="x_id_pic_komplain"/>
+                <field name="x_waktu_dicatat"/>
+                <field name="x_tenggat_tanggapan"/>
+                <field name="x_tenggat_selesai"/>
+                <field name="x_terlambat" widget="boolean_toggle"/>
+                <field name="x_status_komplain" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_complaint_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.complaint.form</field>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <form string="Kasus Komplain">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nomor Kasus"/>
+                        <h1><field name="name" placeholder="KMP-2026-001"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="x_id_pesanan"/>
+                            <field name="x_id_pencatat"/>
+                            <field name="x_id_pic_komplain"/>
+                            <field name="x_status_komplain"/>
+                        </group>
+                        <group>
+                            <field name="x_waktu_dicatat"/>
+                            <field name="x_tenggat_tanggapan"/>
+                            <field name="x_tenggat_selesai"/>
+                            <field name="x_terlambat"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Deskripsi komplain..."/>
+                        <field name="x_lampiran_ids" widget="many2many_binary"/>
+                        <field name="x_hasil_penyelesaian" placeholder="Hasil penanganan..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_complaints" model="ir.actions.act_window">
+        <field name="name">Kasus Komplain</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_complaint_tree"/>
+        <field name="domain">[('x_jenis_cloudlaundry', '=', 'komplain'), ('x_id_pesanan', '!=', False)]</field>
+        <field name="context">{'default_x_jenis_cloudlaundry': 'komplain', 'default_x_status_komplain': 'baru'}</field>
+    </record>
+</odoo>

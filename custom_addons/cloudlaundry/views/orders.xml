@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pesanan, form pesanan, nota, dan daftar belum dibayar. -->
+    <record id="view_cloudlaundry_order_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.sale.order.tree</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Pesanan Cabang" default_order="date_order desc">
+                <field name="name" string="ID Pesanan"/>
+                <field name="x_waktu_diterima"/>
+                <field name="partner_id" string="Pelanggan"/>
+                <field name="warehouse_id" string="Cabang"/>
+                <field name="x_tipe"/>
+                <field name="x_tahap" widget="badge"
+                       decoration-info="x_tahap == 'diterima'"
+                       decoration-warning="x_tahap in ('dicuci', 'dikeringkan', 'disetrika', 'dikemas')"
+                       decoration-success="x_tahap in ('siap_antar', 'selesai')"/>
+                <field name="x_status_bayar" widget="badge"
+                       decoration-danger="x_status_bayar == 'belum_lunas'"
+                       decoration-success="x_status_bayar == 'lunas'"/>
+                <field name="amount_total" string="Total Tagihan" sum="Total"/>
+                <field name="x_perkiraan_selesai"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_order_search" model="ir.ui.view">
+        <field name="name">cloudlaundry.sale.order.search</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <search string="Cari Pesanan">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="warehouse_id"/>
+                <field name="x_tahap"/>
+                <field name="x_status_bayar"/>
+                <filter name="filter_order_pickup" string="Pickup"
+                        domain="[('x_tipe', '=', 'pickup')]"/>
+                <filter name="filter_order_unpaid" string="Belum Lunas"
+                        domain="[('x_status_bayar', '=', 'belum_lunas')]"/>
+                <group expand="0" string="Kelompokkan">
+                    <filter name="group_order_branch" string="Cabang"
+                            context="{'group_by': 'warehouse_id'}"/>
+                    <filter name="group_order_stage" string="Tahap"
+                            context="{'group_by': 'x_tahap'}"/>
+                    <filter name="group_order_payment" string="Pembayaran"
+                            context="{'group_by': 'x_status_bayar'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_orders" model="ir.actions.act_window">
+        <field name="name">Daftar Pesanan Cabang</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_order_tree"/>
+        <field name="search_view_id" ref="view_cloudlaundry_order_search"/>
+        <field name="context">{'search_default_group_order_branch': 1}</field>
+    </record>
+
+    <record id="view_cloudlaundry_order_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="warehouse_id" groups="stock.group_stock_user"/>
+                <field name="x_id_admin"/>
+                <field name="x_tipe"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Operasional Laundry" name="cloudlaundry_operations">
+                    <group>
+                        <group string="Tahap dan Pembayaran">
+                            <field name="x_tahap" widget="statusbar"
+                                   statusbar_visible="diterima,dicuci,dikeringkan,disetrika,dikemas,siap_antar,selesai"/>
+                            <field name="x_status_bayar"/>
+                            <field name="x_waktu_diterima"/>
+                            <field name="x_perkiraan_selesai"/>
+                        </group>
+                        <group string="Portal Status">
+                            <field name="x_token_portal" password="True"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_report_cloudlaundry_receipt" model="ir.actions.report">
+        <field name="name">Nota Pesanan CloudLaundry</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cloudlaundry.report_order_receipt</field>
+        <field name="report_file">cloudlaundry.report_order_receipt</field>
+        <field name="print_report_name">'Nota - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_order_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Nota Pesanan CloudLaundry</h2>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-6">
+                                <strong>ID Pesanan:</strong>
+                                <span t-field="o.name"/>
+                                <br/>
+                                <strong>Pelanggan:</strong>
+                                <span t-field="o.partner_id"/>
+                                <br/>
+                                <strong>Cabang:</strong>
+                                <span t-field="o.warehouse_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Waktu diterima:</strong>
+                                <span t-field="o.x_waktu_diterima"/>
+                                <br/>
+                                <strong>Tahap:</strong>
+                                <span t-field="o.x_tahap"/>
+                                <br/>
+                                <strong>Pembayaran:</strong>
+                                <span t-field="o.x_status_bayar"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Layanan</th>
+                                    <th class="text-end">Kuantitas</th>
+                                    <th class="text-end">Harga</th>
+                                    <th class="text-end">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.order_line" t-as="line">
+                                    <td><span t-field="line.name"/></td>
+                                    <td class="text-end"><span t-field="line.product_uom_qty"/></td>
+                                    <td class="text-end"><span t-field="line.price_unit"/></td>
+                                    <td class="text-end"><span t-field="line.price_subtotal"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-end">
+                            <strong>Total tagihan:</strong>
+                            <span t-field="o.amount_total"/>
+                        </div>
+                        <p t-if="o.x_perkiraan_selesai" class="mt-3">
+                            Perkiraan selesai:
+                            <span t-field="o.x_perkiraan_selesai"/>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_cloudlaundry_unpaid_orders" model="ir.actions.act_window">
+        <field name="name">Daftar Pesanan Belum Dibayar</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_order_tree"/>
+        <field name="search_view_id" ref="view_cloudlaundry_order_search"/>
+        <field name="domain">[('x_status_bayar', '=', 'belum_lunas')]</field>
+    </record>
+</odoo>

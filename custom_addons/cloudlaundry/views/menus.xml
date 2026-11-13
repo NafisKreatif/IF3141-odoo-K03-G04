@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu navigasi CloudLaundry. -->
+    <menuitem id="menu_cloudlaundry_root" name="CloudLaundry"
+              sequence="5" groups="base.group_user"/>
+
+    <menuitem id="menu_cloudlaundry_orders" name="Pesanan Cabang"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_orders"
+              sequence="10" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional,cloudlaundry.group_cloudlaundry_kepala_store"/>
+
+    <menuitem id="menu_cloudlaundry_order_form" name="Form Pesanan"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_orders"
+              sequence="15" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional"/>
+
+    <menuitem id="menu_cloudlaundry_receipt" name="Nota Pesanan (L-03)"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_orders"
+              sequence="20" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional"/>
+
+    <menuitem id="menu_cloudlaundry_portal_demo" name="Portal Status (Demo)"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_portal_demo"
+              sequence="25" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional,cloudlaundry.group_cloudlaundry_kurir"/>
+
+    <menuitem id="menu_cloudlaundry_payments" name="Tagihan QRIS (Demo)"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_payments"
+              sequence="30" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_finance"/>
+
+    <menuitem id="menu_cloudlaundry_unpaid" name="Pesanan Belum Dibayar"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_unpaid_orders"
+              sequence="40" groups="cloudlaundry.group_cloudlaundry_admin"/>
+
+    <menuitem id="menu_cloudlaundry_deliveries" name="Jemput dan Antar"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_deliveries"
+              sequence="50" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_kurir"/>
+
+    <menuitem id="menu_cloudlaundry_tasks" name="Penugasan Harian"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_tasks"
+              sequence="60" groups="cloudlaundry.group_cloudlaundry_kepala_store,cloudlaundry.group_cloudlaundry_staf_operasional"/>
+
+    <menuitem id="menu_cloudlaundry_complaints" name="Kasus Komplain"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_complaints"
+              sequence="70" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_kepala_store,cloudlaundry.group_cloudlaundry_area_manager"/>
+
+    <menuitem id="menu_cloudlaundry_stock" name="Stok Bahan"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_materials"
+              sequence="80" groups="cloudlaundry.group_cloudlaundry_kepala_store,cloudlaundry.group_cloudlaundry_finance"/>
+
+    <menuitem id="menu_cloudlaundry_stock_adjustments" name="Penyesuaian Stok"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_stock_adjustments"
+              sequence="90" groups="cloudlaundry.group_cloudlaundry_kepala_store,cloudlaundry.group_cloudlaundry_finance"/>
+
+    <menuitem id="menu_cloudlaundry_purchase" name="Supplier dan Pembelian"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_purchase_orders"
+              sequence="100" groups="cloudlaundry.group_cloudlaundry_finance"/>
+
+    <menuitem id="menu_cloudlaundry_suppliers" name="Daftar Supplier"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_suppliers"
+              sequence="105" groups="cloudlaundry.group_cloudlaundry_finance"/>
+
+    <menuitem id="menu_cloudlaundry_attendance" name="Check In / Check Out"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_attendance"
+              sequence="110" groups="cloudlaundry.group_cloudlaundry_hr,cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_kepala_store,cloudlaundry.group_cloudlaundry_staf_operasional,cloudlaundry.group_cloudlaundry_kurir"/>
+
+    <menuitem id="menu_cloudlaundry_attendance_report" name="Rekap Kehadiran"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_attendance_report"
+              sequence="120" groups="cloudlaundry.group_cloudlaundry_hr"/>
+
+    <menuitem id="menu_cloudlaundry_dashboard" name="Dasbor KPI dan Laporan"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_dashboard"
+              sequence="130" groups="cloudlaundry.group_cloudlaundry_owner,cloudlaundry.group_cloudlaundry_area_manager,cloudlaundry.group_cloudlaundry_kepala_store,cloudlaundry.group_cloudlaundry_finance"/>
+
+    <menuitem id="menu_cloudlaundry_users" name="Akun dan Hak Akses"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_users"
+              sequence="140" groups="cloudlaundry.group_cloudlaundry_admin_sistem"/>
+
+    <menuitem id="menu_cloudlaundry_customers" name="Data Pelanggan"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_customers"
+              sequence="150" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_admin_sistem"/>
+
+    <menuitem id="menu_cloudlaundry_services" name="Layanan dan Tarif"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_services"
+              sequence="160" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_admin_sistem"/>
+
+    <menuitem id="menu_cloudlaundry_import" name="Impor Data Atur Kuliner"
+              parent="menu_cloudlaundry_root" action="action_cloudlaundry_import"
+              sequence="170" groups="cloudlaundry.group_cloudlaundry_finance,cloudlaundry.group_cloudlaundry_admin_sistem"/>
+</odoo>

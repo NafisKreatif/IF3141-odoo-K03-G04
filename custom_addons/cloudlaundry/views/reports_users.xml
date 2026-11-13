@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Rekap kehadiran, dasbor penjualan, dan akun pengguna. -->
+    <record id="view_cloudlaundry_attendance_pivot" model="ir.ui.view">
+        <field name="name">cloudlaundry.attendance.pivot</field>
+        <field name="model">hr.attendance</field>
+        <field name="arch" type="xml">
+            <pivot string="Rekap Kehadiran">
+                <field name="employee_id" type="row"/>
+                <field name="x_id_cabang" type="col"/>
+                <field name="worked_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_attendance_search" model="ir.ui.view">
+        <field name="name">cloudlaundry.attendance.search</field>
+        <field name="model">hr.attendance</field>
+        <field name="arch" type="xml">
+            <search string="Cari Kehadiran">
+                <field name="employee_id"/>
+                <field name="x_id_cabang"/>
+                <filter name="attendance_month" string="Bulan Ini"
+                        date="check_in" default_period="this_month"/>
+                <group expand="0" string="Kelompokkan">
+                    <filter name="attendance_by_employee" string="Karyawan"
+                            context="{'group_by': 'employee_id'}"/>
+                    <filter name="attendance_by_branch" string="Cabang"
+                            context="{'group_by': 'x_id_cabang'}"/>
+                    <filter name="attendance_by_day" string="Tanggal Check In"
+                            context="{'group_by': 'check_in:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_attendance_report" model="ir.actions.act_window">
+        <field name="name">Rekap Kehadiran</field>
+        <field name="res_model">hr.attendance</field>
+        <field name="view_mode">pivot,tree</field>
+        <field name="view_id" ref="view_cloudlaundry_attendance_pivot"/>
+        <field name="search_view_id" ref="view_cloudlaundry_attendance_search"/>
+    </record>
+
+    <record id="view_cloudlaundry_sales_graph" model="ir.ui.view">
+        <field name="name">cloudlaundry.sales.graph</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <graph string="Dasbor Penjualan" type="bar">
+                <field name="warehouse_id"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_sales_pivot" model="ir.ui.view">
+        <field name="name">cloudlaundry.sales.pivot</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Laporan Penjualan">
+                <field name="warehouse_id" type="row"/>
+                <field name="x_tahap" type="col"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_dashboard" model="ir.actions.act_window">
+        <field name="name">Dasbor KPI dan Laporan</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">graph,pivot,tree</field>
+        <field name="view_id" ref="view_cloudlaundry_sales_graph"/>
+        <field name="context">{'search_default_group_order_branch': 1}</field>
+    </record>
+
+    <record id="view_cloudlaundry_users_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.users.tree</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree string="Akun dan Hak Akses">
+                <field name="name"/>
+                <field name="login"/>
+                <field name="x_id_karyawan"/>
+                <field name="x_peran"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_users_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.users.form</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form string="Akun Pengguna CloudLaundry">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="login"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="x_id_karyawan"/>
+                            <field name="x_peran"/>
+                        </group>
+                    </group>
+                    <group string="Grup Akses Odoo">
+                        <field name="groups_id" widget="many2many_tags"
+                               options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_users" model="ir.actions.act_window">
+        <field name="name">Pengaturan Akun dan Hak Akses</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_users_tree"/>
+        <field name="domain">[('share', '=', False)]</field>
+    </record>
+</odoo>

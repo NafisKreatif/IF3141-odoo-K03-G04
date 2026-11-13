@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Data pelanggan, layanan, tarif, dan impor. -->
+    <record id="view_cloudlaundry_customer_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.customer.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Data Pelanggan">
+                <field name="name"/>
+                <field name="x_no_whatsapp"/>
+                <field name="x_alamat_jemput"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_customer_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.customer.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Pelanggan CloudLaundry">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="x_no_whatsapp"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="x_alamat_jemput"/>
+                            <field name="street"/>
+                            <field name="city"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_customers" model="ir.actions.act_window">
+        <field name="name">Data Pelanggan</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_customer_tree"/>
+        <field name="domain">[('customer_rank', '&gt;', 0)]</field>
+        <field name="context">{'default_customer_rank': 1}</field>
+    </record>
+
+    <record id="view_cloudlaundry_service_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.service.tree</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree string="Layanan dan Tarif">
+                <field name="name"/>
+                <field name="x_jenis_layanan"/>
+                <field name="x_satuan_harga"/>
+                <field name="list_price"/>
+                <field name="x_durasi_jam"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_service_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.service.form</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <form string="Layanan CloudLaundry">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="x_jenis_layanan"/>
+                            <field name="x_satuan_harga"/>
+                        </group>
+                        <group>
+                            <field name="list_price"/>
+                            <field name="x_durasi_jam"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_services" model="ir.actions.act_window">
+        <field name="name">Layanan dan Tarif</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_service_tree"/>
+        <field name="domain">[('x_jenis_layanan', '!=', False)]</field>
+    </record>
+
+    <record id="action_cloudlaundry_import" model="ir.actions.act_window">
+        <field name="name">Impor Data Atur Kuliner</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_customer_tree"/>
+        <field name="domain">[('customer_rank', '&gt;', 0)]</field>
+        <field name="context">{'import_file': True, 'default_customer_rank': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Pilih Impor dari daftar pelanggan.</p>
+            <p>Gunakan berkas CSV/XLS hasil ekspor Atur Kuliner dan tinjau pemetaan kolom sebelum mengimpor.</p>
+        </field>
+    </record>
+</odoo>

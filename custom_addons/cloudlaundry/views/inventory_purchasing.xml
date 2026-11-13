@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bahan, penyesuaian stok, supplier, dan pembelian. -->
+    <record id="view_cloudlaundry_material_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.material.tree</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree string="Bahan CloudLaundry">
+                <field name="name"/>
+                <field name="categ_id"/>
+                <field name="uom_id"/>
+                <field name="x_kritis"/>
+                <field name="x_stok_minimum"/>
+                <field name="qty_available"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cloudlaundry_material_form" model="ir.ui.view">
+        <field name="name">cloudlaundry.material.form</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <form string="Bahan CloudLaundry">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="categ_id"/>
+                            <field name="uom_id"/>
+                        </group>
+                        <group>
+                            <field name="x_kritis"/>
+                            <field name="x_stok_minimum"/>
+                            <field name="qty_available" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_materials" model="ir.actions.act_window">
+        <field name="name">Stok Bahan</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_material_tree"/>
+        <field name="domain">[('detailed_type', '=', 'product')]</field>
+    </record>
+
+    <record id="view_cloudlaundry_stock_adjustment_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.stock.adjustment.tree</field>
+        <field name="model">stock.move</field>
+        <field name="arch" type="xml">
+            <tree string="Penyesuaian Stok Bahan">
+                <field name="x_tanggal_penyesuaian"/>
+                <field name="product_id"/>
+                <field name="x_id_cabang"/>
+                <field name="x_jenis_penyesuaian"/>
+                <field name="x_id_pemeriksa"/>
+                <field name="x_stok_sistem"/>
+                <field name="x_stok_fisik"/>
+                <field name="x_selisih"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_stock_adjustments" model="ir.actions.act_window">
+        <field name="name">Penyesuaian Stok</field>
+        <field name="res_model">stock.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_stock_adjustment_tree"/>
+        <field name="domain">[('x_jenis_penyesuaian', '!=', False)]</field>
+    </record>
+
+    <record id="view_cloudlaundry_purchase_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="arch" type="xml">
+            <tree string="Supplier dan Pesanan Pembelian">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="x_id_cabang"/>
+                <field name="date_order"/>
+                <field name="amount_total" sum="Total"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_purchase_orders" model="ir.actions.act_window">
+        <field name="name">Supplier dan Pesanan Pembelian</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_purchase_tree"/>
+    </record>
+
+    <record id="view_cloudlaundry_supplier_tree" model="ir.ui.view">
+        <field name="name">cloudlaundry.supplier.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Supplier">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="street"/>
+                <field name="city"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_cloudlaundry_suppliers" model="ir.actions.act_window">
+        <field name="name">Supplier</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_cloudlaundry_supplier_tree"/>
+        <field name="domain">[('supplier_rank', '&gt;', 0)]</field>
+        <field name="context">{'default_supplier_rank': 1}</field>
+    </record>
+</odoo>
