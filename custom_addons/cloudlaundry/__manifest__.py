@@ -14,7 +14,8 @@
         "purchase_stock",
     ],
     "data": [
-        "views/pesanan_views.xml",
+        "security/security.xml",
+        "security/ir.model.access.csv",
     ],
     "application": True,
     "installable": True,
