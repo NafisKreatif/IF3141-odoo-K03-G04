@@ -184,6 +184,21 @@
             <field name="x_stok_minimum">30</field>
         </record>
 
+        <function model="ir.model.data" name="_update_xmlids">
+            <value model="base" eval="[
+                {'xml_id': 'cloudlaundry.layanan_cuci_kg_variant', 'record': obj().env.ref('cloudlaundry.layanan_cuci_kg').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.layanan_express_kg_variant', 'record': obj().env.ref('cloudlaundry.layanan_express_kg').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.layanan_kilat_kg_variant', 'record': obj().env.ref('cloudlaundry.layanan_kilat_kg').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.layanan_setrika_pcs_variant', 'record': obj().env.ref('cloudlaundry.layanan_setrika_pcs').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.layanan_langganan_variant', 'record': obj().env.ref('cloudlaundry.layanan_langganan').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.bahan_deterjen_variant', 'record': obj().env.ref('cloudlaundry.bahan_deterjen').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.bahan_pewangi_variant', 'record': obj().env.ref('cloudlaundry.bahan_pewangi').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.bahan_pemutih_variant', 'record': obj().env.ref('cloudlaundry.bahan_pemutih').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.bahan_plastik_kemasan_variant', 'record': obj().env.ref('cloudlaundry.bahan_plastik_kemasan').product_variant_id, 'noupdate': True},
+                {'xml_id': 'cloudlaundry.bahan_hanger_variant', 'record': obj().env.ref('cloudlaundry.bahan_hanger').product_variant_id, 'noupdate': True}
+            ]"/>
+        </function>
+
         <!-- Karyawan -->
         <record id="karyawan_01" model="hr.employee">
             <field name="name">Fajar Nugraha</field>
@@ -350,7 +365,7 @@
         <!-- Item pesanan -->
         <record id="detail_pesanan_01" model="sale.order.line">
             <field name="order_id" ref="pesanan_01"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_cuci_kg').product_variant_id.id"/>
+            <field name="product_id" ref="layanan_cuci_kg_variant"/>
             <field name="name">Cuci Reguler per Kg</field>
             <field name="product_uom" ref="uom.product_uom_kgm"/>
             <field name="product_uom_qty">4</field>
@@ -358,7 +373,7 @@
         </record>
         <record id="detail_pesanan_02" model="sale.order.line">
             <field name="order_id" ref="pesanan_02"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_express_kg').product_variant_id.id"/>
+            <field name="product_id" ref="layanan_express_kg_variant"/>
             <field name="name">Cuci Express per Kg</field>
             <field name="product_uom" ref="uom.product_uom_kgm"/>
             <field name="product_uom_qty">3</field>
@@ -366,7 +381,7 @@
         </record>
         <record id="detail_pesanan_03" model="sale.order.line">
             <field name="order_id" ref="pesanan_03"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_kilat_kg').product_variant_id.id"/>
+            <field name="product_id" ref="layanan_kilat_kg_variant"/>
             <field name="name">Cuci Kilat per Kg</field>
             <field name="product_uom" ref="uom.product_uom_kgm"/>
             <field name="product_uom_qty">2</field>
@@ -374,7 +389,7 @@
         </record>
         <record id="detail_pesanan_04" model="sale.order.line">
             <field name="order_id" ref="pesanan_04"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_setrika_pcs').product_variant_id.id"/>
+            <field name="product_id" ref="layanan_setrika_pcs_variant"/>
             <field name="name">Setrika per Pcs</field>
             <field name="product_uom" ref="uom.product_uom_unit"/>
             <field name="product_uom_qty">8</field>
@@ -382,7 +397,7 @@
         </record>
         <record id="detail_pesanan_05" model="sale.order.line">
             <field name="order_id" ref="pesanan_05"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_langganan').product_variant_id.id"/>
+            <field name="product_id" ref="layanan_langganan_variant"/>
             <field name="name">Paket Langganan Bulanan</field>
             <field name="product_uom" ref="uom.product_uom_unit"/>
             <field name="product_uom_qty">1</field>
@@ -593,7 +608,7 @@
         </record>
         <record id="detail_pembelian_01" model="purchase.order.line">
             <field name="order_id" ref="po_01"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_deterjen').product_variant_id.id"/>
+            <field name="product_id" ref="bahan_deterjen_variant"/>
             <field name="name">Deterjen Cair</field>
             <field name="product_qty">20</field>
             <field name="product_uom" ref="uom.product_uom_litre"/>
@@ -602,7 +617,7 @@
         </record>
         <record id="detail_pembelian_02" model="purchase.order.line">
             <field name="order_id" ref="po_02"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_pewangi').product_variant_id.id"/>
+            <field name="product_id" ref="bahan_pewangi_variant"/>
             <field name="name">Pewangi Pakaian</field>
             <field name="product_qty">15</field>
             <field name="product_uom" ref="uom.product_uom_litre"/>
@@ -611,7 +626,7 @@
         </record>
         <record id="detail_pembelian_03" model="purchase.order.line">
             <field name="order_id" ref="po_03"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_pemutih').product_variant_id.id"/>
+            <field name="product_id" ref="bahan_pemutih_variant"/>
             <field name="name">Pemutih Pakaian</field>
             <field name="product_qty">10</field>
             <field name="product_uom" ref="uom.product_uom_litre"/>
@@ -620,7 +635,7 @@
         </record>
         <record id="detail_pembelian_04" model="purchase.order.line">
             <field name="order_id" ref="po_04"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_plastik_kemasan').product_variant_id.id"/>
+            <field name="product_id" ref="bahan_plastik_kemasan_variant"/>
             <field name="name">Plastik Kemasan Laundry</field>
             <field name="product_qty">500</field>
             <field name="product_uom" ref="uom.product_uom_unit"/>
@@ -629,7 +644,7 @@
         </record>
         <record id="detail_pembelian_05" model="purchase.order.line">
             <field name="order_id" ref="po_05"/>
-            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_hanger').product_variant_id.id"/>
+            <field name="product_id" ref="bahan_hanger_variant"/>
             <field name="name">Hanger Pakaian</field>
             <field name="product_qty">100</field>
             <field name="product_uom" ref="uom.product_uom_unit"/>
@@ -719,7 +734,7 @@
             <field name="x_id_pesanan" ref="pesanan_01"/>
             <field name="x_metode">qris</field>
             <field name="x_nominal">28000</field>
-            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_mata_uang_id" ref="base.IDR"/>
             <field name="x_ref_gateway">DEMO-QRIS-001</field>
             <field name="x_status">berhasil</field>
             <field name="x_waktu">2026-11-13 08:30:00</field>
@@ -728,7 +743,7 @@
             <field name="x_id_pesanan" ref="pesanan_02"/>
             <field name="x_metode">tunai</field>
             <field name="x_nominal">36000</field>
-            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_mata_uang_id" ref="base.IDR"/>
             <field name="x_status">menunggu</field>
             <field name="x_waktu">2026-11-13 09:30:00</field>
         </record>
@@ -736,7 +751,7 @@
             <field name="x_id_pesanan" ref="pesanan_03"/>
             <field name="x_metode">qris</field>
             <field name="x_nominal">36000</field>
-            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_mata_uang_id" ref="base.IDR"/>
             <field name="x_ref_gateway">DEMO-QRIS-003</field>
             <field name="x_status">berhasil</field>
             <field name="x_waktu">2026-11-13 10:30:00</field>
@@ -745,7 +760,7 @@
             <field name="x_id_pesanan" ref="pesanan_04"/>
             <field name="x_metode">tunai</field>
             <field name="x_nominal">40000</field>
-            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_mata_uang_id" ref="base.IDR"/>
             <field name="x_status">menunggu</field>
             <field name="x_waktu">2026-11-13 11:30:00</field>
         </record>
@@ -753,7 +768,7 @@
             <field name="x_id_pesanan" ref="pesanan_05"/>
             <field name="x_metode">qris</field>
             <field name="x_nominal">250000</field>
-            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_mata_uang_id" ref="base.IDR"/>
             <field name="x_ref_gateway">DEMO-QRIS-005</field>
             <field name="x_status">berhasil</field>
             <field name="x_waktu">2026-11-13 12:30:00</field>
