@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Cabang -->
+        <record id="cabang_jakarta" model="stock.warehouse">
+            <field name="name">CloudLaundry Jakarta</field>
+            <field name="code">JKT</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_alamat">Jl. Melati No. 10, Jakarta</field>
+            <field name="x_ukuran">120 m2</field>
+        </record>
+        <record id="cabang_bandung" model="stock.warehouse">
+            <field name="name">CloudLaundry Bandung</field>
+            <field name="code">BDG</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_alamat">Jl. Cihampelas No. 21, Bandung</field>
+            <field name="x_ukuran">95 m2</field>
+        </record>
+        <record id="cabang_surabaya" model="stock.warehouse">
+            <field name="name">CloudLaundry Surabaya</field>
+            <field name="code">SBY</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_alamat">Jl. Diponegoro No. 18, Surabaya</field>
+            <field name="x_ukuran">110 m2</field>
+        </record>
+        <record id="cabang_denpasar" model="stock.warehouse">
+            <field name="name">CloudLaundry Denpasar</field>
+            <field name="code">DPS</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_alamat">Jl. Teuku Umar No. 7, Denpasar</field>
+            <field name="x_ukuran">85 m2</field>
+        </record>
+        <record id="cabang_medan" model="stock.warehouse">
+            <field name="name">CloudLaundry Medan</field>
+            <field name="code">MDN</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_alamat">Jl. Gatot Subroto No. 32, Medan</field>
+            <field name="x_ukuran">100 m2</field>
+        </record>
+
+        <!-- Pelanggan -->
+        <record id="pelanggan_01" model="res.partner">
+            <field name="name">Andi Pratama</field>
+            <field name="customer_rank">1</field>
+            <field name="x_no_whatsapp">081200000001</field>
+            <field name="x_alamat_jemput">Jl. Kenanga No. 5, Jakarta</field>
+            <field name="phone">081200000001</field>
+            <field name="email">andi@example.com</field>
+        </record>
+        <record id="pelanggan_02" model="res.partner">
+            <field name="name">Bunga Lestari</field>
+            <field name="customer_rank">1</field>
+            <field name="x_no_whatsapp">081200000002</field>
+            <field name="x_alamat_jemput">Jl. Sukajadi No. 14, Bandung</field>
+            <field name="phone">081200000002</field>
+            <field name="email">bunga@example.com</field>
+        </record>
+        <record id="pelanggan_03" model="res.partner">
+            <field name="name">Citra Maharani</field>
+            <field name="customer_rank">1</field>
+            <field name="x_no_whatsapp">081200000003</field>
+            <field name="x_alamat_jemput">Jl. Pucang No. 8, Surabaya</field>
+            <field name="phone">081200000003</field>
+            <field name="email">citra@example.com</field>
+        </record>
+        <record id="pelanggan_04" model="res.partner">
+            <field name="name">Dewa Saputra</field>
+            <field name="customer_rank">1</field>
+            <field name="x_no_whatsapp">081200000004</field>
+            <field name="x_alamat_jemput">Jl. Sunset Road No. 12, Denpasar</field>
+            <field name="phone">081200000004</field>
+            <field name="email">dewa@example.com</field>
+        </record>
+        <record id="pelanggan_05" model="res.partner">
+            <field name="name">Eka Wulandari</field>
+            <field name="customer_rank">1</field>
+            <field name="x_no_whatsapp">081200000005</field>
+            <field name="x_alamat_jemput">Jl. Setia Budi No. 20, Medan</field>
+            <field name="phone">081200000005</field>
+            <field name="email">eka@example.com</field>
+        </record>
+
+        <!-- Layanan -->
+        <record id="layanan_cuci_kg" model="product.template">
+            <field name="name">Cuci Reguler per Kg</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="list_price">7000</field>
+            <field name="x_jenis_layanan">reguler</field>
+            <field name="x_satuan_harga">kg</field>
+            <field name="x_durasi_jam">48</field>
+        </record>
+        <record id="layanan_express_kg" model="product.template">
+            <field name="name">Cuci Express per Kg</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="list_price">12000</field>
+            <field name="x_jenis_layanan">express</field>
+            <field name="x_satuan_harga">kg</field>
+            <field name="x_durasi_jam">24</field>
+        </record>
+        <record id="layanan_kilat_kg" model="product.template">
+            <field name="name">Cuci Kilat per Kg</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="list_price">18000</field>
+            <field name="x_jenis_layanan">kilat</field>
+            <field name="x_satuan_harga">kg</field>
+            <field name="x_durasi_jam">6</field>
+        </record>
+        <record id="layanan_setrika_pcs" model="product.template">
+            <field name="name">Setrika per Pcs</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">5000</field>
+            <field name="x_jenis_layanan">satuan</field>
+            <field name="x_satuan_harga">pcs</field>
+            <field name="x_durasi_jam">24</field>
+        </record>
+        <record id="layanan_langganan" model="product.template">
+            <field name="name">Paket Langganan Bulanan</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">250000</field>
+            <field name="x_jenis_layanan">langganan</field>
+            <field name="x_satuan_harga">pcs</field>
+            <field name="x_durasi_jam">720</field>
+        </record>
+
+        <!-- Bahan -->
+        <record id="bahan_deterjen" model="product.template">
+            <field name="name">Deterjen Cair</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_litre"/>
+            <field name="uom_po_id" ref="uom.product_uom_litre"/>
+            <field name="standard_price">22000</field>
+            <field name="purchase_ok" eval="True"/>
+            <field name="x_kritis" eval="True"/>
+            <field name="x_stok_minimum">10</field>
+        </record>
+        <record id="bahan_pewangi" model="product.template">
+            <field name="name">Pewangi Pakaian</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_litre"/>
+            <field name="uom_po_id" ref="uom.product_uom_litre"/>
+            <field name="standard_price">18000</field>
+            <field name="purchase_ok" eval="True"/>
+            <field name="x_kritis" eval="True"/>
+            <field name="x_stok_minimum">8</field>
+        </record>
+        <record id="bahan_pemutih" model="product.template">
+            <field name="name">Pemutih Pakaian</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_litre"/>
+            <field name="uom_po_id" ref="uom.product_uom_litre"/>
+            <field name="standard_price">15000</field>
+            <field name="purchase_ok" eval="True"/>
+            <field name="x_kritis" eval="False"/>
+            <field name="x_stok_minimum">5</field>
+        </record>
+        <record id="bahan_plastik_kemasan" model="product.template">
+            <field name="name">Plastik Kemasan Laundry</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price">500</field>
+            <field name="purchase_ok" eval="True"/>
+            <field name="x_kritis" eval="False"/>
+            <field name="x_stok_minimum">100</field>
+        </record>
+        <record id="bahan_hanger" model="product.template">
+            <field name="name">Hanger Pakaian</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price">1200</field>
+            <field name="purchase_ok" eval="True"/>
+            <field name="x_kritis" eval="False"/>
+            <field name="x_stok_minimum">30</field>
+        </record>
+
+        <!-- Karyawan -->
+        <record id="karyawan_01" model="hr.employee">
+            <field name="name">Fajar Nugraha</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_id_cabang" ref="cabang_jakarta"/>
+        </record>
+        <record id="karyawan_02" model="hr.employee">
+            <field name="name">Gita Permata</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_id_cabang" ref="cabang_bandung"/>
+        </record>
+        <record id="karyawan_03" model="hr.employee">
+            <field name="name">Hadi Kurniawan</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_id_cabang" ref="cabang_surabaya"/>
+        </record>
+        <record id="karyawan_04" model="hr.employee">
+            <field name="name">Intan Sari</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_id_cabang" ref="cabang_denpasar"/>
+        </record>
+        <record id="karyawan_05" model="hr.employee">
+            <field name="name">Joko Santoso</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="x_id_cabang" ref="cabang_medan"/>
+        </record>
+
+        <!-- Akun contoh nonaktif agar tidak membuat kredensial login bawaan -->
+        <record id="akun_01" model="res.users">
+            <field name="name">Fajar Nugraha</field>
+            <field name="login">fajar.cloudlaundry@example.com</field>
+            <field name="email">fajar.cloudlaundry@example.com</field>
+            <field name="active" eval="False"/>
+            <field name="x_id_karyawan" ref="karyawan_01"/>
+            <field name="x_peran">kepala_store</field>
+        </record>
+        <record id="akun_02" model="res.users">
+            <field name="name">Gita Permata</field>
+            <field name="login">gita.cloudlaundry@example.com</field>
+            <field name="email">gita.cloudlaundry@example.com</field>
+            <field name="active" eval="False"/>
+            <field name="x_id_karyawan" ref="karyawan_02"/>
+            <field name="x_peran">staf_operasional</field>
+        </record>
+        <record id="akun_03" model="res.users">
+            <field name="name">Hadi Kurniawan</field>
+            <field name="login">hadi.cloudlaundry@example.com</field>
+            <field name="email">hadi.cloudlaundry@example.com</field>
+            <field name="active" eval="False"/>
+            <field name="x_id_karyawan" ref="karyawan_03"/>
+            <field name="x_peran">staf_operasional</field>
+        </record>
+        <record id="akun_04" model="res.users">
+            <field name="name">Intan Sari</field>
+            <field name="login">intan.cloudlaundry@example.com</field>
+            <field name="email">intan.cloudlaundry@example.com</field>
+            <field name="active" eval="False"/>
+            <field name="x_id_karyawan" ref="karyawan_04"/>
+            <field name="x_peran">kurir</field>
+        </record>
+        <record id="akun_05" model="res.users">
+            <field name="name">Joko Santoso</field>
+            <field name="login">joko.cloudlaundry@example.com</field>
+            <field name="email">joko.cloudlaundry@example.com</field>
+            <field name="active" eval="False"/>
+            <field name="x_id_karyawan" ref="karyawan_05"/>
+            <field name="x_peran">kurir</field>
+        </record>
+
+        <!-- Supplier -->
+        <record id="supplier_01" model="res.partner">
+            <field name="name">PT Bersih Sentosa</field>
+            <field name="supplier_rank">1</field>
+            <field name="x_narahubung">Rina - 021-555-0101</field>
+            <field name="phone">021-555-0101</field>
+            <field name="email">sales@bersihsentosa.example.com</field>
+        </record>
+        <record id="supplier_02" model="res.partner">
+            <field name="name">CV Wangi Sejahtera</field>
+            <field name="supplier_rank">1</field>
+            <field name="x_narahubung">Dodi - 022-555-0102</field>
+            <field name="phone">022-555-0102</field>
+            <field name="email">sales@wangisejahtera.example.com</field>
+        </record>
+        <record id="supplier_03" model="res.partner">
+            <field name="name">Toko Kimia Jaya</field>
+            <field name="supplier_rank">1</field>
+            <field name="x_narahubung">Santi - 031-555-0103</field>
+            <field name="phone">031-555-0103</field>
+            <field name="email">order@kimiajaya.example.com</field>
+        </record>
+        <record id="supplier_04" model="res.partner">
+            <field name="name">PT Plastik Nusantara</field>
+            <field name="supplier_rank">1</field>
+            <field name="x_narahubung">Bimo - 0361-555-0104</field>
+            <field name="phone">0361-555-0104</field>
+            <field name="email">sales@plastiknusantara.example.com</field>
+        </record>
+        <record id="supplier_05" model="res.partner">
+            <field name="name">UD Perlengkapan Laundry</field>
+            <field name="supplier_rank">1</field>
+            <field name="x_narahubung">Nina - 061-555-0105</field>
+            <field name="phone">061-555-0105</field>
+            <field name="email">order@perlengkapanlaundry.example.com</field>
+        </record>
+
+        <!-- Pesanan -->
+        <record id="pesanan_01" model="sale.order">
+            <field name="partner_id" ref="pelanggan_01"/>
+            <field name="warehouse_id" ref="cabang_jakarta"/>
+            <field name="x_id_admin" ref="base.user_admin"/>
+            <field name="x_tipe">pickup</field>
+            <field name="x_tahap">dicuci</field>
+            <field name="x_status_bayar">lunas</field>
+            <field name="x_waktu_diterima">2026-11-13 08:00:00</field>
+            <field name="x_perkiraan_selesai">2026-11-15 08:00:00</field>
+            <field name="x_token_portal">cloudlaundry-demo-order-001</field>
+        </record>
+        <record id="pesanan_02" model="sale.order">
+            <field name="partner_id" ref="pelanggan_02"/>
+            <field name="warehouse_id" ref="cabang_bandung"/>
+            <field name="x_id_admin" ref="base.user_admin"/>
+            <field name="x_tipe">walk_in</field>
+            <field name="x_tahap">dikeringkan</field>
+            <field name="x_status_bayar">belum_lunas</field>
+            <field name="x_waktu_diterima">2026-11-13 09:00:00</field>
+            <field name="x_perkiraan_selesai">2026-11-14 09:00:00</field>
+            <field name="x_token_portal">cloudlaundry-demo-order-002</field>
+        </record>
+        <record id="pesanan_03" model="sale.order">
+            <field name="partner_id" ref="pelanggan_03"/>
+            <field name="warehouse_id" ref="cabang_surabaya"/>
+            <field name="x_id_admin" ref="base.user_admin"/>
+            <field name="x_tipe">pickup</field>
+            <field name="x_tahap">disetrika</field>
+            <field name="x_status_bayar">lunas</field>
+            <field name="x_waktu_diterima">2026-11-13 10:00:00</field>
+            <field name="x_perkiraan_selesai">2026-11-14 10:00:00</field>
+            <field name="x_token_portal">cloudlaundry-demo-order-003</field>
+        </record>
+        <record id="pesanan_04" model="sale.order">
+            <field name="partner_id" ref="pelanggan_04"/>
+            <field name="warehouse_id" ref="cabang_denpasar"/>
+            <field name="x_id_admin" ref="base.user_admin"/>
+            <field name="x_tipe">walk_in</field>
+            <field name="x_tahap">dikemas</field>
+            <field name="x_status_bayar">belum_lunas</field>
+            <field name="x_waktu_diterima">2026-11-13 11:00:00</field>
+            <field name="x_perkiraan_selesai">2026-11-14 11:00:00</field>
+            <field name="x_token_portal">cloudlaundry-demo-order-004</field>
+        </record>
+        <record id="pesanan_05" model="sale.order">
+            <field name="partner_id" ref="pelanggan_05"/>
+            <field name="warehouse_id" ref="cabang_medan"/>
+            <field name="x_id_admin" ref="base.user_admin"/>
+            <field name="x_tipe">pickup</field>
+            <field name="x_tahap">siap_antar</field>
+            <field name="x_status_bayar">lunas</field>
+            <field name="x_waktu_diterima">2026-11-13 12:00:00</field>
+            <field name="x_perkiraan_selesai">2026-11-14 12:00:00</field>
+            <field name="x_token_portal">cloudlaundry-demo-order-005</field>
+        </record>
+
+        <!-- Item pesanan -->
+        <record id="detail_pesanan_01" model="sale.order.line">
+            <field name="order_id" ref="pesanan_01"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_cuci_kg').product_variant_id.id"/>
+            <field name="name">Cuci Reguler per Kg</field>
+            <field name="product_uom" ref="uom.product_uom_kgm"/>
+            <field name="product_uom_qty">4</field>
+            <field name="price_unit">7000</field>
+        </record>
+        <record id="detail_pesanan_02" model="sale.order.line">
+            <field name="order_id" ref="pesanan_02"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_express_kg').product_variant_id.id"/>
+            <field name="name">Cuci Express per Kg</field>
+            <field name="product_uom" ref="uom.product_uom_kgm"/>
+            <field name="product_uom_qty">3</field>
+            <field name="price_unit">12000</field>
+        </record>
+        <record id="detail_pesanan_03" model="sale.order.line">
+            <field name="order_id" ref="pesanan_03"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_kilat_kg').product_variant_id.id"/>
+            <field name="name">Cuci Kilat per Kg</field>
+            <field name="product_uom" ref="uom.product_uom_kgm"/>
+            <field name="product_uom_qty">2</field>
+            <field name="price_unit">18000</field>
+        </record>
+        <record id="detail_pesanan_04" model="sale.order.line">
+            <field name="order_id" ref="pesanan_04"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_setrika_pcs').product_variant_id.id"/>
+            <field name="name">Setrika per Pcs</field>
+            <field name="product_uom" ref="uom.product_uom_unit"/>
+            <field name="product_uom_qty">8</field>
+            <field name="price_unit">5000</field>
+        </record>
+        <record id="detail_pesanan_05" model="sale.order.line">
+            <field name="order_id" ref="pesanan_05"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.layanan_langganan').product_variant_id.id"/>
+            <field name="name">Paket Langganan Bulanan</field>
+            <field name="product_uom" ref="uom.product_uom_unit"/>
+            <field name="product_uom_qty">1</field>
+            <field name="price_unit">250000</field>
+        </record>
+
+        <!-- Kehadiran -->
+        <record id="kehadiran_01" model="hr.attendance">
+            <field name="employee_id" ref="karyawan_01"/>
+            <field name="x_id_cabang" ref="cabang_jakarta"/>
+            <field name="check_in">2026-11-13 08:00:00</field>
+            <field name="check_out">2026-11-13 17:00:00</field>
+        </record>
+        <record id="kehadiran_02" model="hr.attendance">
+            <field name="employee_id" ref="karyawan_02"/>
+            <field name="x_id_cabang" ref="cabang_bandung"/>
+            <field name="check_in">2026-11-13 08:05:00</field>
+            <field name="check_out">2026-11-13 17:05:00</field>
+        </record>
+        <record id="kehadiran_03" model="hr.attendance">
+            <field name="employee_id" ref="karyawan_03"/>
+            <field name="x_id_cabang" ref="cabang_surabaya"/>
+            <field name="check_in">2026-11-13 08:10:00</field>
+            <field name="check_out">2026-11-13 17:10:00</field>
+        </record>
+        <record id="kehadiran_04" model="hr.attendance">
+            <field name="employee_id" ref="karyawan_04"/>
+            <field name="x_id_cabang" ref="cabang_denpasar"/>
+            <field name="check_in">2026-11-13 08:15:00</field>
+            <field name="check_out">2026-11-13 17:15:00</field>
+        </record>
+        <record id="kehadiran_05" model="hr.attendance">
+            <field name="employee_id" ref="karyawan_05"/>
+            <field name="x_id_cabang" ref="cabang_medan"/>
+            <field name="check_in">2026-11-13 08:20:00</field>
+            <field name="check_out">2026-11-13 17:20:00</field>
+        </record>
+
+        <!-- Proyek operasional dan tugas -->
+        <record id="project_operasional" model="project.project">
+            <field name="name">Operasional CloudLaundry</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="tugas_01" model="project.task">
+            <field name="name">Cuci pesanan CL001</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="x_jenis_cloudlaundry">operasional</field>
+            <field name="x_id_cabang" ref="cabang_jakarta"/>
+            <field name="x_id_pic" ref="karyawan_01"/>
+            <field name="x_id_pesanan" ref="pesanan_01"/>
+            <field name="x_tanggal">2026-11-13</field>
+            <field name="x_tahap">cuci</field>
+            <field name="x_status">dikerjakan</field>
+            <field name="x_jadwal_mulai">2026-11-13 09:00:00</field>
+            <field name="x_jadwal_selesai">2026-11-13 11:00:00</field>
+        </record>
+        <record id="tugas_02" model="project.task">
+            <field name="name">Pengeringan pesanan CL002</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="x_jenis_cloudlaundry">operasional</field>
+            <field name="x_id_cabang" ref="cabang_bandung"/>
+            <field name="x_id_pic" ref="karyawan_02"/>
+            <field name="x_id_pesanan" ref="pesanan_02"/>
+            <field name="x_tanggal">2026-11-13</field>
+            <field name="x_tahap">kering</field>
+            <field name="x_status">belum_mulai</field>
+            <field name="x_jadwal_mulai">2026-11-13 11:00:00</field>
+            <field name="x_jadwal_selesai">2026-11-13 12:00:00</field>
+        </record>
+        <record id="tugas_03" model="project.task">
+            <field name="name">Setrika pesanan CL003</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="x_jenis_cloudlaundry">operasional</field>
+            <field name="x_id_cabang" ref="cabang_surabaya"/>
+            <field name="x_id_pic" ref="karyawan_03"/>
+            <field name="x_id_pesanan" ref="pesanan_03"/>
+            <field name="x_tanggal">2026-11-13</field>
+            <field name="x_tahap">setrika</field>
+            <field name="x_status">dikerjakan</field>
+            <field name="x_jadwal_mulai">2026-11-13 12:00:00</field>
+            <field name="x_jadwal_selesai">2026-11-13 13:00:00</field>
+        </record>
+        <record id="tugas_04" model="project.task">
+            <field name="name">Kemas pesanan CL004</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="x_jenis_cloudlaundry">operasional</field>
+            <field name="x_id_cabang" ref="cabang_denpasar"/>
+            <field name="x_id_pic" ref="karyawan_04"/>
+            <field name="x_id_pesanan" ref="pesanan_04"/>
+            <field name="x_tanggal">2026-11-13</field>
+            <field name="x_tahap">kemas</field>
+            <field name="x_status">selesai</field>
+            <field name="x_jadwal_mulai">2026-11-13 13:00:00</field>
+            <field name="x_jadwal_selesai">2026-11-13 14:00:00</field>
+        </record>
+        <record id="tugas_05" model="project.task">
+            <field name="name">Cuci pesanan CL005</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="x_jenis_cloudlaundry">operasional</field>
+            <field name="x_id_cabang" ref="cabang_medan"/>
+            <field name="x_id_pic" ref="karyawan_05"/>
+            <field name="x_id_pesanan" ref="pesanan_05"/>
+            <field name="x_tanggal">2026-11-13</field>
+            <field name="x_tahap">cuci</field>
+            <field name="x_status">belum_mulai</field>
+            <field name="x_jadwal_mulai">2026-11-13 14:00:00</field>
+            <field name="x_jadwal_selesai">2026-11-13 16:00:00</field>
+        </record>
+
+        <!-- Kasus komplain -->
+        <record id="komplain_01" model="project.task">
+            <field name="name">KMP-2026-001</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="description">Noda pada kemeja belum hilang setelah pencucian.</field>
+            <field name="x_jenis_cloudlaundry">komplain</field>
+            <field name="x_id_cabang" ref="cabang_jakarta"/>
+            <field name="x_id_pesanan" ref="pesanan_01"/>
+            <field name="x_id_pic_komplain" ref="karyawan_01"/>
+            <field name="x_id_pencatat" ref="base.user_admin"/>
+            <field name="x_status_komplain">baru</field>
+            <field name="x_waktu_dicatat">2026-11-13 09:00:00</field>
+            <field name="x_tenggat_tanggapan">2026-11-13 12:00:00</field>
+            <field name="x_tenggat_selesai">2026-11-14 09:00:00</field>
+            <field name="x_terlambat" eval="False"/>
+        </record>
+        <record id="komplain_02" model="project.task">
+            <field name="name">KMP-2026-002</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="description">Pelanggan menerima jumlah pakaian kurang satu potong.</field>
+            <field name="x_jenis_cloudlaundry">komplain</field>
+            <field name="x_id_cabang" ref="cabang_bandung"/>
+            <field name="x_id_pesanan" ref="pesanan_02"/>
+            <field name="x_id_pic_komplain" ref="karyawan_02"/>
+            <field name="x_id_pencatat" ref="base.user_admin"/>
+            <field name="x_status_komplain">ditanggapi</field>
+            <field name="x_waktu_dicatat">2026-11-13 09:30:00</field>
+            <field name="x_tenggat_tanggapan">2026-11-13 12:30:00</field>
+            <field name="x_tenggat_selesai">2026-11-14 09:30:00</field>
+            <field name="x_terlambat" eval="False"/>
+        </record>
+        <record id="komplain_03" model="project.task">
+            <field name="name">KMP-2026-003</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="description">Pelanggan meminta pencucian ulang karena aroma pewangi kurang kuat.</field>
+            <field name="x_jenis_cloudlaundry">komplain</field>
+            <field name="x_id_cabang" ref="cabang_surabaya"/>
+            <field name="x_id_pesanan" ref="pesanan_03"/>
+            <field name="x_id_pic_komplain" ref="karyawan_03"/>
+            <field name="x_id_pencatat" ref="base.user_admin"/>
+            <field name="x_status_komplain">dalam_penanganan</field>
+            <field name="x_waktu_dicatat">2026-11-13 10:00:00</field>
+            <field name="x_tenggat_tanggapan">2026-11-13 13:00:00</field>
+            <field name="x_tenggat_selesai">2026-11-14 10:00:00</field>
+            <field name="x_terlambat" eval="False"/>
+        </record>
+        <record id="komplain_04" model="project.task">
+            <field name="name">KMP-2026-004</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="description">Kemasan pesanan rusak saat pelanggan menerimanya.</field>
+            <field name="x_jenis_cloudlaundry">komplain</field>
+            <field name="x_id_cabang" ref="cabang_denpasar"/>
+            <field name="x_id_pesanan" ref="pesanan_04"/>
+            <field name="x_id_pic_komplain" ref="karyawan_04"/>
+            <field name="x_id_pencatat" ref="base.user_admin"/>
+            <field name="x_status_komplain">cuci_ulang</field>
+            <field name="x_waktu_dicatat">2026-11-13 10:30:00</field>
+            <field name="x_tenggat_tanggapan">2026-11-13 13:30:00</field>
+            <field name="x_tenggat_selesai">2026-11-14 10:30:00</field>
+            <field name="x_terlambat" eval="False"/>
+        </record>
+        <record id="komplain_05" model="project.task">
+            <field name="name">KMP-2026-005</field>
+            <field name="project_id" ref="project_operasional"/>
+            <field name="description">Pelanggan meminta penyesuaian biaya layanan.</field>
+            <field name="x_jenis_cloudlaundry">komplain</field>
+            <field name="x_id_cabang" ref="cabang_medan"/>
+            <field name="x_id_pesanan" ref="pesanan_05"/>
+            <field name="x_id_pic_komplain" ref="karyawan_05"/>
+            <field name="x_id_pencatat" ref="base.user_admin"/>
+            <field name="x_status_komplain">selesai</field>
+            <field name="x_waktu_dicatat">2026-11-13 11:00:00</field>
+            <field name="x_tenggat_tanggapan">2026-11-13 14:00:00</field>
+            <field name="x_tenggat_selesai">2026-11-14 11:00:00</field>
+            <field name="x_hasil_penyelesaian">Biaya telah disesuaikan sesuai kesepakatan.</field>
+            <field name="x_terlambat" eval="False"/>
+        </record>
+
+        <!-- Supplier dan pesanan pembelian -->
+        <record id="po_01" model="purchase.order">
+            <field name="partner_id" ref="supplier_01"/>
+            <field name="x_id_cabang" ref="cabang_jakarta"/>
+        </record>
+        <record id="po_02" model="purchase.order">
+            <field name="partner_id" ref="supplier_02"/>
+            <field name="x_id_cabang" ref="cabang_bandung"/>
+        </record>
+        <record id="po_03" model="purchase.order">
+            <field name="partner_id" ref="supplier_03"/>
+            <field name="x_id_cabang" ref="cabang_surabaya"/>
+        </record>
+        <record id="po_04" model="purchase.order">
+            <field name="partner_id" ref="supplier_04"/>
+            <field name="x_id_cabang" ref="cabang_denpasar"/>
+        </record>
+        <record id="po_05" model="purchase.order">
+            <field name="partner_id" ref="supplier_05"/>
+            <field name="x_id_cabang" ref="cabang_medan"/>
+        </record>
+        <record id="detail_pembelian_01" model="purchase.order.line">
+            <field name="order_id" ref="po_01"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_deterjen').product_variant_id.id"/>
+            <field name="name">Deterjen Cair</field>
+            <field name="product_qty">20</field>
+            <field name="product_uom" ref="uom.product_uom_litre"/>
+            <field name="price_unit">22000</field>
+            <field name="date_planned">2026-11-14 08:00:00</field>
+        </record>
+        <record id="detail_pembelian_02" model="purchase.order.line">
+            <field name="order_id" ref="po_02"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_pewangi').product_variant_id.id"/>
+            <field name="name">Pewangi Pakaian</field>
+            <field name="product_qty">15</field>
+            <field name="product_uom" ref="uom.product_uom_litre"/>
+            <field name="price_unit">18000</field>
+            <field name="date_planned">2026-11-14 09:00:00</field>
+        </record>
+        <record id="detail_pembelian_03" model="purchase.order.line">
+            <field name="order_id" ref="po_03"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_pemutih').product_variant_id.id"/>
+            <field name="name">Pemutih Pakaian</field>
+            <field name="product_qty">10</field>
+            <field name="product_uom" ref="uom.product_uom_litre"/>
+            <field name="price_unit">15000</field>
+            <field name="date_planned">2026-11-14 10:00:00</field>
+        </record>
+        <record id="detail_pembelian_04" model="purchase.order.line">
+            <field name="order_id" ref="po_04"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_plastik_kemasan').product_variant_id.id"/>
+            <field name="name">Plastik Kemasan Laundry</field>
+            <field name="product_qty">500</field>
+            <field name="product_uom" ref="uom.product_uom_unit"/>
+            <field name="price_unit">500</field>
+            <field name="date_planned">2026-11-14 11:00:00</field>
+        </record>
+        <record id="detail_pembelian_05" model="purchase.order.line">
+            <field name="order_id" ref="po_05"/>
+            <field name="product_id" eval="obj().env.ref('cloudlaundry.bahan_hanger').product_variant_id.id"/>
+            <field name="name">Hanger Pakaian</field>
+            <field name="product_qty">100</field>
+            <field name="product_uom" ref="uom.product_uom_unit"/>
+            <field name="price_unit">1200</field>
+            <field name="date_planned">2026-11-14 12:00:00</field>
+        </record>
+
+        <!-- Riwayat status pesanan -->
+        <record id="riwayat_01" model="cloudlaundry.riwayat_status">
+            <field name="x_id_pesanan" ref="pesanan_01"/>
+            <field name="x_tahap">dicuci</field>
+            <field name="x_id_karyawan" ref="karyawan_01"/>
+            <field name="x_waktu">2026-11-13 09:00:00</field>
+        </record>
+        <record id="riwayat_02" model="cloudlaundry.riwayat_status">
+            <field name="x_id_pesanan" ref="pesanan_02"/>
+            <field name="x_tahap">dikeringkan</field>
+            <field name="x_id_karyawan" ref="karyawan_02"/>
+            <field name="x_waktu">2026-11-13 10:00:00</field>
+        </record>
+        <record id="riwayat_03" model="cloudlaundry.riwayat_status">
+            <field name="x_id_pesanan" ref="pesanan_03"/>
+            <field name="x_tahap">disetrika</field>
+            <field name="x_id_karyawan" ref="karyawan_03"/>
+            <field name="x_waktu">2026-11-13 11:00:00</field>
+        </record>
+        <record id="riwayat_04" model="cloudlaundry.riwayat_status">
+            <field name="x_id_pesanan" ref="pesanan_04"/>
+            <field name="x_tahap">dikemas</field>
+            <field name="x_id_karyawan" ref="karyawan_04"/>
+            <field name="x_waktu">2026-11-13 12:00:00</field>
+        </record>
+        <record id="riwayat_05" model="cloudlaundry.riwayat_status">
+            <field name="x_id_pesanan" ref="pesanan_05"/>
+            <field name="x_tahap">siap_antar</field>
+            <field name="x_id_karyawan" ref="karyawan_05"/>
+            <field name="x_waktu">2026-11-13 13:00:00</field>
+        </record>
+
+        <!-- Pengantaran dan penjemputan -->
+        <record id="pengantaran_01" model="cloudlaundry.pengantaran">
+            <field name="x_id_pesanan" ref="pesanan_01"/>
+            <field name="x_id_kurir" ref="karyawan_04"/>
+            <field name="x_jenis">jemput</field>
+            <field name="x_alamat">Jl. Kenanga No. 5, Jakarta</field>
+            <field name="x_jadwal">2026-11-13 08:00:00</field>
+            <field name="x_status">dijemput</field>
+            <field name="x_waktu_update">2026-11-13 08:15:00</field>
+        </record>
+        <record id="pengantaran_02" model="cloudlaundry.pengantaran">
+            <field name="x_id_pesanan" ref="pesanan_02"/>
+            <field name="x_id_kurir" ref="karyawan_05"/>
+            <field name="x_jenis">antar</field>
+            <field name="x_alamat">Jl. Sukajadi No. 14, Bandung</field>
+            <field name="x_jadwal">2026-11-14 09:00:00</field>
+            <field name="x_status">dijadwalkan</field>
+        </record>
+        <record id="pengantaran_03" model="cloudlaundry.pengantaran">
+            <field name="x_id_pesanan" ref="pesanan_03"/>
+            <field name="x_id_kurir" ref="karyawan_04"/>
+            <field name="x_jenis">jemput</field>
+            <field name="x_alamat">Jl. Pucang No. 8, Surabaya</field>
+            <field name="x_jadwal">2026-11-13 10:00:00</field>
+            <field name="x_status">dalam_perjalanan</field>
+            <field name="x_waktu_update">2026-11-13 10:20:00</field>
+        </record>
+        <record id="pengantaran_04" model="cloudlaundry.pengantaran">
+            <field name="x_id_pesanan" ref="pesanan_04"/>
+            <field name="x_id_kurir" ref="karyawan_05"/>
+            <field name="x_jenis">antar</field>
+            <field name="x_alamat">Jl. Sunset Road No. 12, Denpasar</field>
+            <field name="x_jadwal">2026-11-14 11:00:00</field>
+            <field name="x_status">dijadwalkan</field>
+        </record>
+        <record id="pengantaran_05" model="cloudlaundry.pengantaran">
+            <field name="x_id_pesanan" ref="pesanan_05"/>
+            <field name="x_id_kurir" ref="karyawan_04"/>
+            <field name="x_jenis">antar</field>
+            <field name="x_alamat">Jl. Setia Budi No. 20, Medan</field>
+            <field name="x_jadwal">2026-11-14 12:00:00</field>
+            <field name="x_status">diterima</field>
+            <field name="x_waktu_update">2026-11-14 13:00:00</field>
+        </record>
+
+        <!-- Pembayaran -->
+        <record id="pembayaran_01" model="cloudlaundry.pembayaran">
+            <field name="x_id_pesanan" ref="pesanan_01"/>
+            <field name="x_metode">qris</field>
+            <field name="x_nominal">28000</field>
+            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_ref_gateway">DEMO-QRIS-001</field>
+            <field name="x_status">berhasil</field>
+            <field name="x_waktu">2026-11-13 08:30:00</field>
+        </record>
+        <record id="pembayaran_02" model="cloudlaundry.pembayaran">
+            <field name="x_id_pesanan" ref="pesanan_02"/>
+            <field name="x_metode">tunai</field>
+            <field name="x_nominal">36000</field>
+            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_status">menunggu</field>
+            <field name="x_waktu">2026-11-13 09:30:00</field>
+        </record>
+        <record id="pembayaran_03" model="cloudlaundry.pembayaran">
+            <field name="x_id_pesanan" ref="pesanan_03"/>
+            <field name="x_metode">qris</field>
+            <field name="x_nominal">36000</field>
+            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_ref_gateway">DEMO-QRIS-003</field>
+            <field name="x_status">berhasil</field>
+            <field name="x_waktu">2026-11-13 10:30:00</field>
+        </record>
+        <record id="pembayaran_04" model="cloudlaundry.pembayaran">
+            <field name="x_id_pesanan" ref="pesanan_04"/>
+            <field name="x_metode">tunai</field>
+            <field name="x_nominal">40000</field>
+            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_status">menunggu</field>
+            <field name="x_waktu">2026-11-13 11:30:00</field>
+        </record>
+        <record id="pembayaran_05" model="cloudlaundry.pembayaran">
+            <field name="x_id_pesanan" ref="pesanan_05"/>
+            <field name="x_metode">qris</field>
+            <field name="x_nominal">250000</field>
+            <field name="x_mata_uang_id" eval="obj().env.company.currency_id.id"/>
+            <field name="x_ref_gateway">DEMO-QRIS-005</field>
+            <field name="x_status">berhasil</field>
+            <field name="x_waktu">2026-11-13 12:30:00</field>
+        </record>
+    </data>
+</odoo>
