@@ -26,7 +26,7 @@
         "views/reports_users.xml",
         "views/master_data_import.xml",
         "views/menus.xml",
-        "data/seed_data.xml",
+        "demo/data_demo.xml",
     ],
     "application": True,
     "installable": True,
