@@ -187,7 +187,11 @@ class Pembayaran(models.Model):
         string="Metode",
         required=True,
     )
-    x_nominal = fields.Monetary(string="Nominal", required=True)
+    x_nominal = fields.Monetary(
+        string="Nominal",
+        required=True,
+        currency_field="x_mata_uang_id",
+    )
     x_mata_uang_id = fields.Many2one(
         "res.currency",
         string="Mata Uang",

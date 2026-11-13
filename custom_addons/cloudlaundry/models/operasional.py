@@ -4,6 +4,11 @@ from odoo import fields, models
 class Tugas(models.Model):
     _inherit = "project.task"
 
+    x_jenis_cloudlaundry = fields.Selection(
+        [("operasional", "Operasional"), ("komplain", "Komplain")],
+        string="Jenis Tugas CloudLaundry",
+        index=True,
+    )
     x_id_cabang = fields.Many2one("stock.warehouse", string="Cabang")
     x_id_pic = fields.Many2one("hr.employee", string="PIC")
     x_id_pesanan = fields.Many2one("sale.order", string="Pesanan")
@@ -63,6 +68,17 @@ class Kehadiran(models.Model):
 class KasusKomplain(models.Model):
     _inherit = "project.task"
 
+    x_status_komplain = fields.Selection(
+        [
+            ("baru", "Baru"),
+            ("ditanggapi", "Ditanggapi"),
+            ("dalam_penanganan", "Dalam Penanganan"),
+            ("cuci_ulang", "Cuci Ulang"),
+            ("selesai", "Selesai"),
+        ],
+        string="Status Komplain",
+        default="baru",
+    )
     x_id_pesanan = fields.Many2one(
         "sale.order",
         string="Pesanan Komplain",
