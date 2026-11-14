@@ -8,14 +8,6 @@
               parent="menu_cloudlaundry_root" action="action_cloudlaundry_orders"
               sequence="10" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional,cloudlaundry.group_cloudlaundry_kepala_store"/>
 
-    <menuitem id="menu_cloudlaundry_order_form" name="Form Pesanan"
-              parent="menu_cloudlaundry_root" action="action_cloudlaundry_orders"
-              sequence="15" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional"/>
-
-    <menuitem id="menu_cloudlaundry_receipt" name="Nota Pesanan (L-03)"
-              parent="menu_cloudlaundry_root" action="action_cloudlaundry_orders"
-              sequence="20" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional"/>
-
     <menuitem id="menu_cloudlaundry_portal_demo" name="Portal Status (Demo)"
               parent="menu_cloudlaundry_root" action="action_cloudlaundry_portal_demo"
               sequence="25" groups="cloudlaundry.group_cloudlaundry_admin,cloudlaundry.group_cloudlaundry_staf_operasional,cloudlaundry.group_cloudlaundry_kurir"/>
