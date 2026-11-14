@@ -92,6 +92,7 @@
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_cloudlaundry_service_tree"/>
         <field name="domain">[('x_jenis_layanan', '!=', False)]</field>
+        <field name="context">{'default_purchase_ok': False, 'default_detailed_type': 'service'}</field>
     </record>
 
     <record id="action_cloudlaundry_import" model="ir.actions.act_window">
