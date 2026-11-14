@@ -63,7 +63,7 @@
                 <field name="x_jadwal_selesai"/>
                 <field name="x_status"/>
                 <templates>
-                    <t t-name="card">
+                    <t t-name="kanban-box">
                         <div class="d-flex flex-column gap-1">
                             <strong><field name="name"/></strong>
                             <div><field name="x_id_pesanan"/></div>
